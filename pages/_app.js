@@ -1,17 +1,13 @@
-import { ErrorComponent, ErrorBoundary } from "@blitzjs/next"
-import React from "react"
-import { withBlitz } from "app/blitz-client"
-function RootErrorFallback({ error }) {
-  return (
-    <ErrorComponent statusCode={error?.statusCode || 400} title={error.message || error.name} />
-  )
-}
+import '../styles/globals.css'
+import { ThemeProvider, theme, CSSReset } from '@chakra-ui/react';
+
 function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page)
   return (
-    <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      {getLayout(<Component {...pageProps} />)}
-    </ErrorBoundary>
+    <ThemeProvider theme={theme}>
+      <CSSReset />
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
-export default withBlitz(MyApp)
+
+export default MyApp
